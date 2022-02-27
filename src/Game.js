@@ -1,10 +1,10 @@
 import * as Chess from "chess.js";
 import { BehaviorSubject } from "rxjs";
 
-let promotion = "rnb2bnr/pppPkppp/8/4p3/7q/8/PPPP1PPP/RNBQKBNR w KQ - 1 5";
+//let promotion = "rnb2bnr/pppPkppp/8/4p3/7q/8/PPPP1PPP/RNBQKBNR w KQ - 1 5";
 let staleMate = "4k3/4P3/4K3/8/8/8/8/8 b - - 0 78";
-let checkMate = "rnb1kbnr/pppp1ppp/8/4p3/5PPq/8/PPPPP2P/RNBQKBNR w KQkq - 1 3";
-let insufficientMaterial = "k7/8/n7/8/8/8/8/7K b - - 0 1";
+//let checkMate = "rnb1kbnr/pppp1ppp/8/4p3/5PPq/8/PPPPP2P/RNBQKBNR w KQkq - 1 3";
+//let insufficientMaterial = "k7/8/n7/8/8/8/8/7K b - - 0 1";
 
 const chess = new Chess(staleMate);
 console.log(chess);
@@ -15,6 +15,10 @@ export const gameSubject = new BehaviorSubject({
 });
 
 export function initGame() {
+    const savedGame = localStorage.getItem('savedGame')
+    if(savedGame) {
+        chess.load(savedGame)
+    }
   updateGame();
 }
 
@@ -53,8 +57,12 @@ function updateGame(pendingPromotion) {
     board: chess.board(),
     pendingPromotion,
     isGameOver,
+    turn: chess.turn(),
     result: isGameOver ? getGameResult() : null,
   };
+
+  localStorage.setItem('savedGame', chess.fen())
+
   gameSubject.next(newGame);
 }
 
