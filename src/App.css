@@ -83,10 +83,12 @@
   max-height: 70%;
 }
 
-.vertical-text {
-    text-orientation: upright;
-    writing-mode: vertical-lr;
+.result-text {
     font-family: sans-serif;
     padding: 10px;
     color: white;
+}
+
+.result-text.result {
+  margin-top: 15px;
 }

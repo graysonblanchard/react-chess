@@ -24,14 +24,14 @@ function App() {
   return (
     <div className="container">
       <h1>Chess</h1>
-      {isGameOver && <h2 className="vertical-text">GAME OVER</h2>}
+      {isGameOver && <h2 className="result-text game-over">GAME OVER</h2>}
       <div className="board-container">
         <Board board={board} turn={turn} />
       </div>
       <button onClick={resetGame}>
-        <span>NEW GAME</span>
+        <span>RESET GAME</span>
       </button>
-      {result && <p className="vertical-text">{result}</p>}
+      {result && <p className="result-text result">{result}</p>}
     </div>
   );
 }
