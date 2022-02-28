@@ -15,7 +15,7 @@ function App() {
       setBoard(game.board);
       setIsGameOver(game.isGameOver);
       setResult(game.result);
-      setTurn(game.turn)
+      setTurn(game.turn);
     });
     return () => {
       subscribe.unsubscribe();
@@ -23,17 +23,14 @@ function App() {
   }, []);
   return (
     <div className="container">
-      {isGameOver && (
-        <h2 className="vertical-text">
-          GAME OVER
-          <button onClick={resetGame}>
-            <span className="vertical-text">NEW GAME</span>
-          </button>
-        </h2>
-      )}
+      <h1>Chess</h1>
+      {isGameOver && <h2 className="vertical-text">GAME OVER</h2>}
       <div className="board-container">
         <Board board={board} turn={turn} />
       </div>
+      <button onClick={resetGame}>
+        <span>NEW GAME</span>
+      </button>
       {result && <p className="vertical-text">{result}</p>}
     </div>
   );
